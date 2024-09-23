@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gestion_de_un_Hospital
+namespace Gestión_de_un_Hospital
 {
-    internal class Program
+    class Paciente : Persona
     {
-        static void Main(string[] args)
-        {
-           
-        }
+        public Paciente (string nombre) : base(nombre) { }
+
     }
 }
