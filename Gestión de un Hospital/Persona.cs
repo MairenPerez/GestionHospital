@@ -8,7 +8,7 @@ namespace Gestión_de_un_Hospital
 {
     class Persona
     {
-        protected string Nombre { get; set; }
+        public string Nombre { get; set; }
 
         public Persona(string nombre)
         {

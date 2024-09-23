@@ -14,7 +14,7 @@ namespace Gestion_de_un_Hospital
 
         static void Main(string[] args)
         {
-            while(true)
+            while (true)
             {
                 Console.WriteLine(@"
                     Gestión del Hospital
@@ -29,37 +29,81 @@ namespace Gestion_de_un_Hospital
                     ");
                 string opcion = Console.ReadLine();
 
-                switch(opcion)
+                switch (opcion)
                 {
-                    case 1:
+                    case "1":
                         DarAltaMedico();
                         break;
-                    case 2:
+                    case "2":
                         DarAltaPaciente();
                         break;
-                    case 3:
+                    case "3":
                         DarAltaPersAdm();
                         break;
-                    case 4:
+                    case "4":
                         ListarMedicos();
                         break;
-                    case 5:
+                    case "5":
                         ListarPacientesMedico();
                         break;
-                    case 6:
+                    case "6":
                         EliminarPaciente();
                         break;
-                    case 7:
+                    case "7":
                         VerListaPersonas();
                         break;
-                    case 8:
+                    case "8":
                         return;
                     default:
                         Console.WriteLine("Opción no válida");
                         break;
                 }
             }
-           
         }
+
+        /// <summary>
+        /// Damos de alta un médico
+        /// 
+        /// Lo añadimos a la lista de médicos y a la lista de personas
+        /// </summary>
+        static void DarAltaMedico()
+        {
+            Console.WriteLine("Nombre del médico:");
+            string nombre = Console.ReadLine();
+
+            Medico medico = new Medico(nombre);
+            medicos.Add(medico);
+            personas.Add(medico);
+
+            Console.WriteLine("Médico dado de alta");
+        }
+
+        /// <summary>
+        /// Damos de alta un paciente
+        /// 
+        /// Si el nombre del médico existe en la lista  
+        /// le asignamos  el paciente
+        /// </summary>
+        static void DarAltaPacientees()
+        {
+            Console.WriteLine("Nombre del paciente: ");
+            string nombre = Console.ReadLine();
+            Console.Write("Ingrese el nombre del médico asignado: ");
+            string nombreMedico = Console.ReadLine();
+
+            Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
+            if (medico != null)
+            {
+                Paciente paciente = new Paciente(nombre);
+                medico.AgregarPaciente(paciente);
+                personas.Add(paciente);
+
+                Console.WriteLine("Paciente dado de alta");
+            }
+            else
+                Console.WriteLine("Médico no encontrado");
+        }
+
+
     }
 }

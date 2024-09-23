@@ -8,9 +8,9 @@ namespace Gestión_de_un_Hospital
 {
     class Medico : Persona
     {
-        private List <Paciente> Pacientes { get; set; }
+        private List<Paciente> Pacientes { get; set; }
 
-        public Medico (string nombre) : base(nombre)
+        public Medico(string nombre) : base(nombre)
         {
             Pacientes = new List<Paciente>();
         }
