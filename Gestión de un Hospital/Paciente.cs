@@ -8,7 +8,11 @@ namespace Gestión_de_un_Hospital
 {
     class Paciente : Persona
     {
-        public Paciente (string nombre) : base(nombre) { }
+        public Paciente(string nombre) : base(nombre) { }
 
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

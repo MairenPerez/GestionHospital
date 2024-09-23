@@ -9,5 +9,10 @@ namespace Gestión_de_un_Hospital
     class PersonalAdministrativo : Persona
     {
         public PersonalAdministrativo(string nombre) : base(nombre) { }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

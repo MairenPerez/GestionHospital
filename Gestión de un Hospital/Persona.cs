@@ -8,16 +8,11 @@ namespace Gestión_de_un_Hospital
 {
     class Persona
     {
-        private String Nombre { get; set; }
+        protected string Nombre { get; set; }
 
-        public Persona (string nombre)
+        public Persona(string nombre)
         {
             Nombre = nombre;
-        }
-
-        public override string ToString()
-        {
-            return Nombre;
         }
     }
 }
