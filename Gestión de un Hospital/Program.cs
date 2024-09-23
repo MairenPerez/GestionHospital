@@ -84,7 +84,7 @@ namespace Gestion_de_un_Hospital
         /// Si el nombre del médico existe en la lista  
         /// le asignamos  el paciente
         /// </summary>
-        static void DarAltaPacientees()
+        static void DarAltaPaciente()
         {
             Console.WriteLine("Nombre del paciente: ");
             string nombre = Console.ReadLine();
@@ -104,6 +104,48 @@ namespace Gestion_de_un_Hospital
                 Console.WriteLine("Médico no encontrado");
         }
 
+        /// <summary>
+        /// Dar de alta a los personales Adm
+        /// </summary>
+        static void DarAltaPersAdm()
+        {
+            Console.WriteLine("Nombre del personal administrativo:");
+            string nombre = Console.ReadLine();
+            
+            PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre);
+            personas.Add(personaAdm);
 
+            Console.WriteLine("Personal administrativo dado de alta");
+        }
+
+        /// <summary>
+        /// Listamos todos los médicos de la 
+        /// lista.
+        /// </summary>
+        static void ListarMedicos()
+        {
+            foreach (Medico medico in medicos)
+                Console.WriteLine(medico.Nombre);
+        }
+
+        static void ListarPacientesMedico()
+        {
+            Console.WriteLine("Nombre del médico: ");
+            string nombreMedico = Console.ReadLine();
+            
+            Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
+
+            // Comprobamos si el médico existe
+            if (medico != null)
+            {
+                Console.WriteLine($"Pacientes del médico {medico.Nombre}:");
+                foreach (Paciente paciente in medico.Pacientes)
+                    Console.WriteLine(paciente.Nombre);
+            }
+            else 
+                Console.WriteLine("Médico no encontrado");
+        }
     }
+
+
 }
