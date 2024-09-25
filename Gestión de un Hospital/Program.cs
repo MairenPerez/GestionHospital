@@ -26,7 +26,8 @@ namespace Gestion_de_un_Hospital
                         5. Listar los pacientes de un médico
                         6. Eliminar a un paciente
                         7. Ver la lista de personas del hospital
-                        8. Salir
+                        8. Modificar datos
+                        9. Salir
                         ");
                 string opcion = Console.ReadLine();
 
@@ -54,6 +55,9 @@ namespace Gestion_de_un_Hospital
                         VerListaPersonas();
                         break;
                     case "8":
+                        ModificarDatos();
+                        break;
+                    case "9":
                         return;
                     default:
                         Console.WriteLine("Opción no válida");
@@ -129,6 +133,9 @@ namespace Gestion_de_un_Hospital
 
                 Console.WriteLine("Paciente dado de alta");
             }
+
+            else
+                Console.WriteLine("Médico no encontrado");
         }
 
         /// <summary>
@@ -226,6 +233,48 @@ namespace Gestion_de_un_Hospital
             Console.WriteLine("Lista de personas del hospital:");
             foreach (Persona persona in personas)
                 Console.WriteLine(persona.Nombre);
+        }
+
+        /// <summary>
+        /// Modificar los datos de las personas
+        /// que estan en el hospital
+        /// </summary>
+        static void ModificarDatos()
+        {
+            Console.Write(" Introduce tu nombre ");
+            string datos = Console.ReadLine();
+
+            foreach (Persona persona in personas)
+            {
+                if (persona.Nombre == datos)
+                {
+                    Console.WriteLine("Nombre: ");
+                    persona.Nombre = Console.ReadLine();
+                    Console.WriteLine("Apellidos: ");
+                    persona.Apellidos = Console.ReadLine();
+                    Console.WriteLine("Teléfono: ");
+                    persona.Telefono = Console.ReadLine();
+
+                    if (persona is Medico)
+                    {
+                        Console.WriteLine("Especialidad:");
+                        ((Medico)persona).Especialidad = Console.ReadLine();
+                        Console.WriteLine("Salario:");
+                        ((Medico)persona).SalarioMedico = double.Parse(Console.ReadLine());
+                    }
+                    else if (persona is PersonalAdministrativo)
+                    {
+                        Console.WriteLine("Departamento:");
+                        ((PersonalAdministrativo)persona).Departamento = Console.ReadLine();
+                        Console.WriteLine("Puesto:");
+                        ((PersonalAdministrativo)persona).Puesto = Console.ReadLine();
+                        Console.WriteLine("Salario:");
+                        ((PersonalAdministrativo)persona).SalarioPersonalAdm = double.Parse(Console.ReadLine());
+                    }
+
+                    Console.WriteLine("Datos modificados");
+                }
+            }
         }
     }
 }
