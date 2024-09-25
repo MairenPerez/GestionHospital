@@ -1,14 +1,14 @@
-﻿using Gestión_de_un_Hospital;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gestion_de_un_Hospital
+namespace Gestión_de_un_Hospital
 {
-    internal class Program
+    class Program
     {
+        static Hospital hospital = new Hospital();
         static List<Medico> medicos = new List<Medico>();
         static List<Persona> personas = new List<Persona>();
 
@@ -27,7 +27,8 @@ namespace Gestion_de_un_Hospital
                         6. Eliminar a un paciente
                         7. Ver la lista de personas del hospital
                         8. Modificar datos
-                        9. Salir
+                        9. Consultar citas 
+                        10. Salir
                         ");
                 string opcion = Console.ReadLine();
 
@@ -58,6 +59,9 @@ namespace Gestion_de_un_Hospital
                         ModificarDatos();
                         break;
                     case "9":
+                        ConsultarCitas();
+                        break;
+                    case "10":
                         return;
                     default:
                         Console.WriteLine("Opción no válida");
@@ -88,7 +92,7 @@ namespace Gestion_de_un_Hospital
             Console.WriteLine("Salario del médico:");
             double salario = double.Parse(Console.ReadLine());
 
-            Medico medico = new Medico(nombre, apellidos, sexo, telefono, especialidad, numColegiado, especialidad, salario);
+            Medico medico = new Medico(nombre, apellidos, sexo, telefono, especialidad, numColegiado, salario);
             medicos.Add(medico);
             personas.Add(medico);
 
@@ -143,19 +147,19 @@ namespace Gestion_de_un_Hospital
         /// </summary>
         static void DarAltaPersAdm()
         {
-            Console.WriteLine("Nombre del personal administrativo:");
+            Console.WriteLine("Nombre:");
             string nombre = Console.ReadLine();
-            Console.WriteLine("Apellidos del personal administrativo:");
+            Console.WriteLine("Apellidos:");
             string apellidos = Console.ReadLine();
-            Console.WriteLine("Sexo del personal administrativo:");
+            Console.WriteLine("Sexo:");
             string sexo = Console.ReadLine();
-            Console.WriteLine("Teléfono del personal administrativo:");
+            Console.WriteLine("Teléfono:");
             string telefono = Console.ReadLine();
-            Console.WriteLine("Departamento del personal administrativo:");
+            Console.WriteLine("Departamento:");
             string departamento = Console.ReadLine();
-            Console.WriteLine("Puesto del personal administrativo:");
+            Console.WriteLine("Puesto:");
             string puesto = Console.ReadLine();
-            Console.WriteLine("Salario del personal administrativo:");
+            Console.WriteLine("Salario:");
             double salario = double.Parse(Console.ReadLine());
 
             PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre, apellidos, sexo, telefono, departamento)
@@ -275,6 +279,24 @@ namespace Gestion_de_un_Hospital
                     Console.WriteLine("Datos modificados");
                 }
             }
+        }
+
+        public static void ConsultarCitas()
+        {
+            Console.WriteLine("Nombre del médico:");
+            string nombreMedico = Console.ReadLine();
+
+            Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
+
+            if (medico != null)
+            {
+                Console.WriteLine($" Citas del médico {medico.Nombre}:");
+                foreach (Cita cita in medico.Citas)
+                    Console.WriteLine(cita.ToString());
+            }
+            else
+                Console.WriteLine("Médico no encontrado");
+
         }
     }
 }

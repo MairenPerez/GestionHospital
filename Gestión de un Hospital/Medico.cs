@@ -8,14 +8,16 @@ class Medico : Persona
     public double SalarioMedico { get; set; }
 
     public List<Paciente> Pacientes { get; set; }
+    public List<Cita> Citas { get; set; }
 
-    public Medico(string nombre, string apellidos, string sexo, string telefono, string direccion, int numColegiado, string especialidad, double salarioMedico)
-        : base(nombre, apellidos, sexo, telefono)
+    public Medico(string nombre, string apellidos, string sexo, string telefono, string especialidad, int numColegiado, double salario)
+    : base(nombre, apellidos, sexo, telefono)
     {
         NumColegiado = numColegiado;
         Especialidad = especialidad;
-        SalarioMedico = 0;
+        SalarioMedico = salario;
         Pacientes = new List<Paciente>();
+        Citas = new List<Cita>();
     }
 
     public void AgregarPaciente(Paciente paciente)
@@ -26,6 +28,11 @@ class Medico : Persona
     public void EliminarPaciente(Paciente paciente)
     {
         Pacientes.Remove(paciente);
+    }
+
+    public void AgregarCita(Cita cita)
+    {
+        Citas.Add(cita);
     }
 
     public override string ToString()

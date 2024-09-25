@@ -12,7 +12,7 @@ namespace Gestión_de_un_Hospital
         public string Diagnostico { get; set; }
         public string Tratamiento { get; set; }
         public DateTime FechaIngreso { get; set; }
-        public DateTime FechaAlta { get; set; }
+        public DateTime? FechaAlta { get; set; }
         public Medico MedicoAsignado { get; set; }
 
         public Paciente(string nombre, string apellidos, string sexo, string telefono, string direccion, DateTime fechaNacimiento, string numeroHistoriaClinica, string diagnostico, string tratamiento, DateTime fechaIngreso, Medico medicoAsignado)
