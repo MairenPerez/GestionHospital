@@ -18,6 +18,7 @@ namespace Gestion_de_un_Hospital
             {
                 Console.WriteLine(@"
                         Gestión del Hospital
+    
                         1. Dar de alta un médico
                         2. Dar de alta un paciente
                         3. Dar de alta un personal administrativo
@@ -128,8 +129,6 @@ namespace Gestion_de_un_Hospital
 
                 Console.WriteLine("Paciente dado de alta");
             }
-            else
-                Console.WriteLine("Médico no encontrado");
         }
 
         /// <summary>

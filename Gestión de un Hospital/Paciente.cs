@@ -14,7 +14,6 @@ namespace Gestión_de_un_Hospital
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaAlta { get; set; }
         public Medico MedicoAsignado { get; set; }
-        public Medico Medico { get; }
 
         public Paciente(string nombre, string apellidos, string sexo, string telefono, string direccion, DateTime fechaNacimiento, string numeroHistoriaClinica, string diagnostico, string tratamiento, DateTime fechaIngreso, Medico medicoAsignado)
            : base(nombre, apellidos, sexo, telefono)
@@ -26,14 +25,18 @@ namespace Gestión_de_un_Hospital
             MedicoAsignado = medicoAsignado;
         }
 
-        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime fechaAlta, Medico medico) : base(nombre, apellidos, sexo, telefono)
+        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime fechaAlta)
+            : base(nombre, apellidos, sexo, telefono)
         {
             NumHistoriaClinica = numHistoriaClinica;
             FechaIngreso = fechaIngreso;
             Diagnostico = diagnostico;
             Tratamiento = tratamiento;
             FechaAlta = fechaAlta;
-            Medico = medico;
+        }
+
+        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime fechaAlta, Medico medico) : this(nombre, apellidos, sexo, telefono, numHistoriaClinica, fechaIngreso, diagnostico, tratamiento, fechaAlta)
+        {
         }
 
         public override string ToString()

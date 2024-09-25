@@ -23,7 +23,7 @@ namespace Gestión_de_un_Hospital
 
         public override string ToString()
         {
-            return "Nombre: " + Nombre + " Apellidos: " + Apellidos + " Sexo: " + Sexo + " Teléfono: " + Telefono + " Dirección: " + Direccion;
+            return "Nombre: " + Nombre + " Apellidos: " + Apellidos + " Sexo: " + Sexo + " Teléfono: " + Telefono;
         }
     }
 }
