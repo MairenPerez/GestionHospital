@@ -17,16 +17,16 @@ namespace Gestion_de_un_Hospital
             while (true)
             {
                 Console.WriteLine(@"
-                    Gestión del Hospital
-                    1. Dar de alta un médico
-                    2. Dar de alta un paciente
-                    3. Dar de alta un personal administrativo
-                    4. Listar todos los médicos
-                    5. Listar los pacientes de un médico
-                    6. Eliminar a un paciente
-                    7. Ver la lista de personas del hospital
-                    8. Salir
-                    ");
+                        Gestión del Hospital
+                        1. Dar de alta un médico
+                        2. Dar de alta un paciente
+                        3. Dar de alta un personal administrativo
+                        4. Listar todos los médicos
+                        5. Listar los pacientes de un médico
+                        6. Eliminar a un paciente
+                        7. Ver la lista de personas del hospital
+                        8. Salir
+                        ");
                 string opcion = Console.ReadLine();
 
                 switch (opcion)
@@ -111,7 +111,7 @@ namespace Gestion_de_un_Hospital
         {
             Console.WriteLine("Nombre del personal administrativo:");
             string nombre = Console.ReadLine();
-            
+
             PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre);
             personas.Add(personaAdm);
 
@@ -128,11 +128,14 @@ namespace Gestion_de_un_Hospital
                 Console.WriteLine(medico.Nombre);
         }
 
+        /// <summary>
+        /// De cada médico listamos sus pacientes
+        /// </summary>
         static void ListarPacientesMedico()
         {
             Console.WriteLine("Nombre del médico: ");
             string nombreMedico = Console.ReadLine();
-            
+
             Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
 
             // Comprobamos si el médico existe
@@ -142,10 +145,32 @@ namespace Gestion_de_un_Hospital
                 foreach (Paciente paciente in medico.Pacientes)
                     Console.WriteLine(paciente.Nombre);
             }
-            else 
+            else
                 Console.WriteLine("Médico no encontrado");
         }
+
+
+        /// <summary>
+        /// Eliminamos al paciente de la lista,
+        /// por lo tanto el médico ya no lo tendrá
+        /// </summary>
+        static void EliminarPaciente()
+        {
+            Console.Write("Ingrese el nombre del paciente a eliminar: ");
+            string nombrePaciente = Console.ReadLine();
+
+            foreach (Medico medico in medicos)
+            {
+                Paciente paciente = medico.Pacientes.Find(p => p.Nombre == nombrePaciente);
+                if (paciente != null)
+                {
+                    medico.EliminarPaciente(paciente);
+                    personas.Remove(paciente);
+                    Console.WriteLine("Paciente eliminado");
+                    return;
+                }
+            }
+            Console.WriteLine("Paciente no encontrado");
+        }
     }
-
-
 }
