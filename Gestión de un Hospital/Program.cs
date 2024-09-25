@@ -166,11 +166,24 @@ namespace Gestion_de_un_Hospital
                 {
                     medico.EliminarPaciente(paciente);
                     personas.Remove(paciente);
+
                     Console.WriteLine("Paciente eliminado");
+
                     return;
                 }
             }
             Console.WriteLine("Paciente no encontrado");
         }
+
+        /// <summary>
+        /// Mostramos la lista de personas del hospital
+        /// </summary>
+        static void VerListaPersonas()
+        {
+            Console.WriteLine("Lista de personas del hospital:");
+            foreach (Persona persona in personas)
+                Console.WriteLine(persona.Nombre);
+        }
     }
 }
+
