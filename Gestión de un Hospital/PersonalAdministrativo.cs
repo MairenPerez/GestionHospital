@@ -8,11 +8,16 @@ namespace Gestión_de_un_Hospital
 {
     class PersonalAdministrativo : Persona
     {
-        public PersonalAdministrativo(string nombre) : base(nombre) { }
+        public string Departamento { get; set; }
+        public string Puesto { get; set; }
+        public double SalarioPersonalAdm { get; set; }
+
+        public PersonalAdministrativo(string nombre, string apellidos, string sexo, string telefono, string direccion)
+            : base(nombre, apellidos, sexo, telefono) { }
 
         public override string ToString()
         {
-            return Nombre;
+            return base.ToString();
         }
     }
 }

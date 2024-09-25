@@ -3,10 +3,18 @@ using System.Collections.Generic;
 
 class Medico : Persona
 {
+    public int NumColegiado { get; set; }
+    public string Especialidad { get; set; }
+    public double SalarioMedico { get; set; }
+
     public List<Paciente> Pacientes { get; set; }
 
-    public Medico(string nombre) : base(nombre)
+    public Medico(string nombre, string apellidos, string sexo, string telefono, string direccion, int numColegiado, string especialidad, double salarioMedico)
+        : base(nombre, apellidos, sexo, telefono)
     {
+        NumColegiado = numColegiado;
+        Especialidad = especialidad;
+        SalarioMedico = 0;
         Pacientes = new List<Paciente>();
     }
 
@@ -22,6 +30,6 @@ class Medico : Persona
 
     public override string ToString()
     {
-        return Nombre;
+        return base.ToString();
     }
 }

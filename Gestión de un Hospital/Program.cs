@@ -70,8 +70,20 @@ namespace Gestion_de_un_Hospital
         {
             Console.WriteLine("Nombre del médico:");
             string nombre = Console.ReadLine();
+            Console.WriteLine("Apellidos del médico:");
+            string apellidos = Console.ReadLine();
+            Console.WriteLine("Sexo del médico:");
+            string sexo = Console.ReadLine();
+            Console.WriteLine("Teléfono del médico:");
+            string telefono = Console.ReadLine();
+            Console.WriteLine("Especialidad del médico:");
+            string especialidad = Console.ReadLine();
+            Console.WriteLine("Número de colegiado del médico:");
+            int numColegiado = int.Parse(Console.ReadLine());
+            Console.WriteLine("Salario del médico:");
+            double salario = double.Parse(Console.ReadLine());
 
-            Medico medico = new Medico(nombre);
+            Medico medico = new Medico(nombre, apellidos, sexo, telefono, especialidad, numColegiado, especialidad, salario);
             medicos.Add(medico);
             personas.Add(medico);
 
@@ -88,13 +100,29 @@ namespace Gestion_de_un_Hospital
         {
             Console.WriteLine("Nombre del paciente: ");
             string nombre = Console.ReadLine();
+            Console.WriteLine("Apellidos del paciente: ");
+            string apellidos = Console.ReadLine();
+            Console.WriteLine("Sexo del paciente: ");
+            string sexo = Console.ReadLine();
+            Console.WriteLine("Teléfono del paciente: ");
+            string telefono = Console.ReadLine();
+            Console.WriteLine("Número de historia clínica del paciente: ");
+            string numHistoriaClinica = Console.ReadLine();
+            Console.WriteLine("Diagnóstico del paciente: ");
+            string diagnostico = Console.ReadLine();
+            Console.WriteLine("Tratamiento del paciente: ");
+            string tratamiento = Console.ReadLine();
+            Console.WriteLine("Fecha de ingreso del paciente (yyyy-MM-dd): ");
+            DateTime fechaIngreso = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Fecha de alta del paciente (yyyy-MM-dd): ");
+            DateTime fechaAlta = DateTime.Parse(Console.ReadLine());
             Console.Write("Ingrese el nombre del médico asignado: ");
             string nombreMedico = Console.ReadLine();
 
             Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
             if (medico != null)
             {
-                Paciente paciente = new Paciente(nombre);
+                Paciente paciente = new Paciente(nombre, apellidos, sexo, telefono, numHistoriaClinica, fechaIngreso, diagnostico, tratamiento, fechaAlta, medico);
                 medico.AgregarPaciente(paciente);
                 personas.Add(paciente);
 
@@ -111,8 +139,24 @@ namespace Gestion_de_un_Hospital
         {
             Console.WriteLine("Nombre del personal administrativo:");
             string nombre = Console.ReadLine();
+            Console.WriteLine("Apellidos del personal administrativo:");
+            string apellidos = Console.ReadLine();
+            Console.WriteLine("Sexo del personal administrativo:");
+            string sexo = Console.ReadLine();
+            Console.WriteLine("Teléfono del personal administrativo:");
+            string telefono = Console.ReadLine();
+            Console.WriteLine("Departamento del personal administrativo:");
+            string departamento = Console.ReadLine();
+            Console.WriteLine("Puesto del personal administrativo:");
+            string puesto = Console.ReadLine();
+            Console.WriteLine("Salario del personal administrativo:");
+            double salario = double.Parse(Console.ReadLine());
 
-            PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre);
+            PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre, apellidos, sexo, telefono, departamento)
+            {
+                Puesto = puesto,
+                SalarioPersonalAdm = salario
+            };
             personas.Add(personaAdm);
 
             Console.WriteLine("Personal administrativo dado de alta");

@@ -8,11 +8,37 @@ namespace Gestión_de_un_Hospital
 {
     class Paciente : Persona
     {
-        public Paciente(string nombre) : base(nombre) { }
+        public string NumHistoriaClinica { get; set; }
+        public string Diagnostico { get; set; }
+        public string Tratamiento { get; set; }
+        public DateTime FechaIngreso { get; set; }
+        public DateTime FechaAlta { get; set; }
+        public Medico MedicoAsignado { get; set; }
+        public Medico Medico { get; }
+
+        public Paciente(string nombre, string apellidos, string sexo, string telefono, string direccion, DateTime fechaNacimiento, string numeroHistoriaClinica, string diagnostico, string tratamiento, DateTime fechaIngreso, Medico medicoAsignado)
+           : base(nombre, apellidos, sexo, telefono)
+        {
+            NumHistoriaClinica = numeroHistoriaClinica;
+            Diagnostico = diagnostico;
+            Tratamiento = tratamiento;
+            FechaIngreso = fechaIngreso;
+            MedicoAsignado = medicoAsignado;
+        }
+
+        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime fechaAlta, Medico medico) : base(nombre, apellidos, sexo, telefono)
+        {
+            NumHistoriaClinica = numHistoriaClinica;
+            FechaIngreso = fechaIngreso;
+            Diagnostico = diagnostico;
+            Tratamiento = tratamiento;
+            FechaAlta = fechaAlta;
+            Medico = medico;
+        }
 
         public override string ToString()
         {
-            return Nombre;
+            return base.ToString();
         }
     }
 }
