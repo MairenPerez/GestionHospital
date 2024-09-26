@@ -52,6 +52,9 @@ namespace Gestión_de_un_Hospital
                         CrearCita();
                         break;
                     case "11":
+                        ModificarCita();
+                        break;
+                    case "12":
                         return;
                     default:
                         Console.WriteLine("Opción no válida");
@@ -75,7 +78,8 @@ namespace Gestión_de_un_Hospital
                         8. Modificar datos
                         9. Consultar citas 
                         10. Crear cita
-                        11. Salir
+                        11. Modificar cita
+                        12. Salir
                         ");
         }
 
@@ -370,6 +374,47 @@ namespace Gestión_de_un_Hospital
                 Console.WriteLine($"Error al crear la cita: {ex.Message}");
             }
         }
-    }   
+
+        static void ModificarCita()
+        {
+            try
+            {
+                Console.WriteLine("Introduzca el ID de la cita: ");
+                int idCita = int.Parse(Console.ReadLine());
+
+                Cita cita = hospital.Citas.Find(c => c.IdCita == idCita);
+
+                if (cita != null)
+                {
+                    Console.WriteLine("Para cuando quiere cambiar la cita (yyyy-MM-dd HH:mm): ");
+                    DateTime nuevaFechaHora;
+
+                    if (!DateTime.TryParse(Console.ReadLine(), out nuevaFechaHora))
+                    {
+                        Console.WriteLine("Formato de fecha y hora incorrecto.");
+                        return;
+                    }
+
+                    Console.WriteLine("Cual es su motivo de la cita: ");
+                    string nuevoMotivo = Console.ReadLine();
+
+                    cita.ModificarCita(nuevaFechaHora, nuevoMotivo);
+                    Console.WriteLine("Se ha modificado su cita");
+                }
+                else
+                    Console.WriteLine("Cita no encontrada");
+            }
+
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Error de formato: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al modificar la cita: {ex.Message}");
+            }
+        }
+
+    }
 }
 

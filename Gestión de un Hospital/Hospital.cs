@@ -51,15 +51,6 @@ namespace Gestión_de_un_Hospital
             PersonalAdministrativos.ForEach(personalAdministrativo => Console.WriteLine(personalAdministrativo.ToString()));
         }
 
-        //public void CrearCita(int idCita, DateTime fechaHora, Paciente paciente, Medico medico, string motivo)
-        //{
-        //    Cita nuevaCita = new Cita(idCita, fechaHora, paciente.Nombre, medico.Nombre, motivo);
-        //    Citas.Add(nuevaCita);
-        //    medico.AgregarCita(nuevaCita);
-        //    paciente.MedicoAsignado = medico;
-        //    Console.WriteLine("Cita creada con éxito.");
-        //}
-
         public void CancelarCita(int idCita)
         {
             Cita cita = Citas.Find(c => c.IdCita == idCita);
