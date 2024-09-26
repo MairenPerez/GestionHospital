@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gestión_de_un_Hospital
 {
-    class Cita 
+    class Cita
     {
         public int IdCita { get; set; }
         public DateTime FechaHora { get; set; }
@@ -15,9 +11,9 @@ namespace Gestión_de_un_Hospital
         public string Motivo { get; set; }
         public EstadoCita Estado { get; set; }
 
-        public enum EstadoCita { Pendiente, Realizada, Cancelada }  
+        public enum EstadoCita { Pendiente, Realizada, Cancelada }
 
-        public Cita (int idCita, DateTime fechaHora, string paciente, string medico, string motivo)
+        public Cita(int idCita, DateTime fechaHora, string paciente, string medico, string motivo)
         {
             IdCita = idCita;
             FechaHora = fechaHora;
@@ -36,8 +32,7 @@ namespace Gestión_de_un_Hospital
         }
 
         /// <summary>
-        /// Modificamos la fecha y el motivo de 
-        /// la cita.
+        /// Modificamos la fecha y el motivo de la cita.
         /// </summary>
         /// <param name="nuevaFechaHora"></param>
         /// <param name="motivoNuevo"></param>
@@ -51,7 +46,6 @@ namespace Gestión_de_un_Hospital
             else
                 Console.WriteLine("No es posible modificar una cita cancelada.");
         }
-
 
         public override string ToString()
         {

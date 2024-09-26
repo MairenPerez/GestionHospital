@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gestión_de_un_Hospital
+﻿namespace Gestión_de_un_Hospital
 {
     class PersonalAdministrativo : Persona
     {
@@ -13,11 +7,16 @@ namespace Gestión_de_un_Hospital
         public double SalarioPersonalAdm { get; set; }
 
         public PersonalAdministrativo(string nombre, string apellidos, string sexo, string telefono, string direccion)
-            : base(nombre, apellidos, sexo, telefono) { }
+            : base(nombre, apellidos, sexo, telefono) 
+        {
+            Departamento = string.Empty;
+            Puesto = string.Empty;
+            SalarioPersonalAdm = 0;
+        }
 
         public override string ToString()
         {
-            return base.ToString();
+            return $"{base.ToString()}, Departamento: {Departamento}, Puesto: {Puesto}, Salario: {SalarioPersonalAdm}";
         }
     }
 }

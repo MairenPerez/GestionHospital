@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gestión_de_un_Hospital
 {
@@ -23,9 +19,10 @@ namespace Gestión_de_un_Hospital
             Tratamiento = tratamiento;
             FechaIngreso = fechaIngreso;
             MedicoAsignado = medicoAsignado;
+            FechaAlta = null;
         }
 
-        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime fechaAlta)
+        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime? fechaAlta = null)
             : base(nombre, apellidos, sexo, telefono)
         {
             NumHistoriaClinica = numHistoriaClinica;
@@ -33,15 +30,14 @@ namespace Gestión_de_un_Hospital
             Diagnostico = diagnostico;
             Tratamiento = tratamiento;
             FechaAlta = fechaAlta;
-        }
-
-        public Paciente(string nombre, string apellidos, string sexo, string telefono, string numHistoriaClinica, DateTime fechaIngreso, string diagnostico, string tratamiento, DateTime fechaAlta, Medico medico) : this(nombre, apellidos, sexo, telefono, numHistoriaClinica, fechaIngreso, diagnostico, tratamiento, fechaAlta)
-        {
+            MedicoAsignado = null;
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return $"{base.ToString()}, NumHistoriaClinica: {NumHistoriaClinica}, Diagnostico: {Diagnostico}, Tratamiento: {Tratamiento}, FechaIngreso: {FechaIngreso}, FechaAlta: {FechaAlta?.ToString() ?? "N/A"}, MedicoAsignado: {MedicoAsignado?.Nombre ?? "N/A"}";
         }
     }
 }
+
+

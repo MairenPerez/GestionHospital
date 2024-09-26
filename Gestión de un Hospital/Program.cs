@@ -16,20 +16,7 @@ namespace Gestión_de_un_Hospital
         {
             while (true)
             {
-                Console.WriteLine(@"
-                        Gestión del Hospital
-    
-                        1. Dar de alta un médico
-                        2. Dar de alta un paciente
-                        3. Dar de alta un personal administrativo
-                        4. Listar todos los médicos
-                        5. Listar los pacientes de un médico
-                        6. Eliminar a un paciente
-                        7. Ver la lista de personas del hospital
-                        8. Modificar datos
-                        9. Consultar citas 
-                        10. Salir
-                        ");
+                MostraMenu();
                 string opcion = Console.ReadLine();
 
                 switch (opcion)
@@ -70,6 +57,24 @@ namespace Gestión_de_un_Hospital
             }
         }
 
+        private static void MostraMenu()
+        {
+            Console.WriteLine(@"
+                        Gestión del Hospital
+    
+                        1. Dar de alta un médico
+                        2. Dar de alta un paciente
+                        3. Dar de alta un personal administrativo
+                        4. Listar todos los médicos
+                        5. Listar los pacientes de un médico
+                        6. Eliminar a un paciente
+                        7. Ver la lista de personas del hospital
+                        8. Modificar datos
+                        9. Consultar citas 
+                        10. Salir
+                        ");
+        }
+
         /// <summary>
         /// Damos de alta un médico
         /// 
@@ -77,26 +82,33 @@ namespace Gestión_de_un_Hospital
         /// </summary>
         static void DarAltaMedico()
         {
-            Console.WriteLine("Nombre del médico:");
-            string nombre = Console.ReadLine();
-            Console.WriteLine("Apellidos del médico:");
-            string apellidos = Console.ReadLine();
-            Console.WriteLine("Sexo del médico:");
-            string sexo = Console.ReadLine();
-            Console.WriteLine("Teléfono del médico:");
-            string telefono = Console.ReadLine();
-            Console.WriteLine("Especialidad del médico:");
-            string especialidad = Console.ReadLine();
-            Console.WriteLine("Número de colegiado del médico:");
-            int numColegiado = int.Parse(Console.ReadLine());
-            Console.WriteLine("Salario del médico:");
-            double salario = double.Parse(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("Nombre del médico:");
+                string nombre = Console.ReadLine();
+                Console.WriteLine("Apellidos del médico:");
+                string apellidos = Console.ReadLine();
+                Console.WriteLine("Sexo del médico:");
+                string sexo = Console.ReadLine();
+                Console.WriteLine("Teléfono del médico:");
+                string telefono = Console.ReadLine();
+                Console.WriteLine("Especialidad del médico:");
+                string especialidad = Console.ReadLine();
+                Console.WriteLine("Número de colegiado del médico:");
+                int numColegiado = int.Parse(Console.ReadLine());
+                Console.WriteLine("Salario del médico:");
+                double salario = double.Parse(Console.ReadLine());
 
-            Medico medico = new Medico(nombre, apellidos, sexo, telefono, especialidad, numColegiado, salario);
-            medicos.Add(medico);
-            personas.Add(medico);
+                Medico medico = new Medico(nombre, apellidos, sexo, telefono, especialidad, numColegiado, salario);
+                medicos.Add(medico);
+                personas.Add(medico);
 
-            Console.WriteLine("Médico dado de alta");
+                Console.WriteLine("Médico dado de alta");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
         }
 
         /// <summary>
@@ -107,69 +119,88 @@ namespace Gestión_de_un_Hospital
         /// </summary>
         static void DarAltaPaciente()
         {
-            Console.WriteLine("Nombre del paciente: ");
-            string nombre = Console.ReadLine();
-            Console.WriteLine("Apellidos del paciente: ");
-            string apellidos = Console.ReadLine();
-            Console.WriteLine("Sexo del paciente: ");
-            string sexo = Console.ReadLine();
-            Console.WriteLine("Teléfono del paciente: ");
-            string telefono = Console.ReadLine();
-            Console.WriteLine("Número de historia clínica del paciente: ");
-            string numHistoriaClinica = Console.ReadLine();
-            Console.WriteLine("Diagnóstico del paciente: ");
-            string diagnostico = Console.ReadLine();
-            Console.WriteLine("Tratamiento del paciente: ");
-            string tratamiento = Console.ReadLine();
-            Console.WriteLine("Fecha de ingreso del paciente (yyyy-MM-dd): ");
-            DateTime fechaIngreso = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine("Fecha de alta del paciente (yyyy-MM-dd): ");
-            DateTime fechaAlta = DateTime.Parse(Console.ReadLine());
-            Console.Write("Ingrese el nombre del médico asignado: ");
-            string nombreMedico = Console.ReadLine();
-
-            Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
-            if (medico != null)
+            try
             {
-                Paciente paciente = new Paciente(nombre, apellidos, sexo, telefono, numHistoriaClinica, fechaIngreso, diagnostico, tratamiento, fechaAlta, medico);
-                medico.AgregarPaciente(paciente);
-                personas.Add(paciente);
+                Console.WriteLine("Nombre del paciente: ");
+                string nombre = Console.ReadLine();
+                Console.WriteLine("Apellidos del paciente: ");
+                string apellidos = Console.ReadLine();
+                Console.WriteLine("Sexo del paciente: ");
+                string sexo = Console.ReadLine();
+                Console.WriteLine("Teléfono del paciente: ");
+                string telefono = Console.ReadLine();
+                Console.WriteLine("Número de historia clínica del paciente: ");
+                string numHistoriaClinica = Console.ReadLine();
+                Console.WriteLine("Diagnóstico del paciente: ");
+                string diagnostico = Console.ReadLine();
+                Console.WriteLine("Tratamiento del paciente: ");
+                string tratamiento = Console.ReadLine();
+                Console.WriteLine("Fecha de ingreso del paciente (yyyy-MM-dd): ");
+                DateTime fechaIngreso = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Fecha de alta del paciente (yyyy-MM-dd): ");
+                DateTime fechaAlta = DateTime.Parse(Console.ReadLine());
+                Console.Write("Ingrese el nombre del médico asignado: ");
+                string nombreMedico = Console.ReadLine();
 
-                Console.WriteLine("Paciente dado de alta");
+                Medico medico = medicos.Find(m => m.Nombre == nombreMedico);
+                if (medico != null)
+                {
+                    Paciente paciente = new Paciente(nombre, apellidos, sexo, telefono, "", DateTime.MinValue, numHistoriaClinica, diagnostico, tratamiento, fechaIngreso, medico)
+                    {
+                        FechaAlta = fechaAlta
+                    };
+                    medico.AgregarPaciente(paciente);
+                    personas.Add(paciente);
+
+                    Console.WriteLine("Paciente dado de alta");
+                }
+                else
+                {
+                    Console.WriteLine("Médico no encontrado");
+                }
             }
-
-            else
-                Console.WriteLine("Médico no encontrado");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al dar de alta al paciente: {ex.Message}");
+            }
         }
+
 
         /// <summary>
         /// Dar de alta a los personales Adm
         /// </summary>
         static void DarAltaPersAdm()
         {
-            Console.WriteLine("Nombre:");
-            string nombre = Console.ReadLine();
-            Console.WriteLine("Apellidos:");
-            string apellidos = Console.ReadLine();
-            Console.WriteLine("Sexo:");
-            string sexo = Console.ReadLine();
-            Console.WriteLine("Teléfono:");
-            string telefono = Console.ReadLine();
-            Console.WriteLine("Departamento:");
-            string departamento = Console.ReadLine();
-            Console.WriteLine("Puesto:");
-            string puesto = Console.ReadLine();
-            Console.WriteLine("Salario:");
-            double salario = double.Parse(Console.ReadLine());
-
-            PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre, apellidos, sexo, telefono, departamento)
+            try
             {
-                Puesto = puesto,
-                SalarioPersonalAdm = salario
-            };
-            personas.Add(personaAdm);
+                Console.WriteLine("Nombre:");
+                string nombre = Console.ReadLine();
+                Console.WriteLine("Apellidos:");
+                string apellidos = Console.ReadLine();
+                Console.WriteLine("Sexo:");
+                string sexo = Console.ReadLine();
+                Console.WriteLine("Teléfono:");
+                string telefono = Console.ReadLine();
+                Console.WriteLine("Departamento:");
+                string departamento = Console.ReadLine();
+                Console.WriteLine("Puesto:");
+                string puesto = Console.ReadLine();
+                Console.WriteLine("Salario:");
+                double salario = double.Parse(Console.ReadLine());
 
-            Console.WriteLine("Personal administrativo dado de alta");
+                PersonalAdministrativo personaAdm = new PersonalAdministrativo(nombre, apellidos, sexo, telefono, departamento)
+                {
+                    Puesto = puesto,
+                    SalarioPersonalAdm = salario
+                };
+                personas.Add(personaAdm);
+
+                Console.WriteLine("Personal administrativo dado de alta");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al dar de alta al personal administrativo: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -245,42 +276,41 @@ namespace Gestión_de_un_Hospital
         /// </summary>
         static void ModificarDatos()
         {
-            Console.Write(" Introduce tu nombre ");
+            Console.Write("Introduce tu nombre: ");
             string datos = Console.ReadLine();
 
-            foreach (Persona persona in personas)
+            Persona persona = personas.Find(p => p.Nombre == datos);
+            if (persona != null)
             {
-                if (persona.Nombre == datos)
+                Console.WriteLine("Nombre: ");
+                persona.Nombre = Console.ReadLine();
+                Console.WriteLine("Apellidos: ");
+                persona.Apellidos = Console.ReadLine();
+                Console.WriteLine("Teléfono: ");
+                persona.Telefono = Console.ReadLine();
+
+                if (persona is Medico medico)
                 {
-                    Console.WriteLine("Nombre: ");
-                    persona.Nombre = Console.ReadLine();
-                    Console.WriteLine("Apellidos: ");
-                    persona.Apellidos = Console.ReadLine();
-                    Console.WriteLine("Teléfono: ");
-                    persona.Telefono = Console.ReadLine();
-
-                    if (persona is Medico)
-                    {
-                        Console.WriteLine("Especialidad:");
-                        ((Medico)persona).Especialidad = Console.ReadLine();
-                        Console.WriteLine("Salario:");
-                        ((Medico)persona).SalarioMedico = double.Parse(Console.ReadLine());
-                    }
-                    else if (persona is PersonalAdministrativo)
-                    {
-                        Console.WriteLine("Departamento:");
-                        ((PersonalAdministrativo)persona).Departamento = Console.ReadLine();
-                        Console.WriteLine("Puesto:");
-                        ((PersonalAdministrativo)persona).Puesto = Console.ReadLine();
-                        Console.WriteLine("Salario:");
-                        ((PersonalAdministrativo)persona).SalarioPersonalAdm = double.Parse(Console.ReadLine());
-                    }
-
-                    Console.WriteLine("Datos modificados");
+                    Console.WriteLine("Especialidad:");
+                    medico.Especialidad = Console.ReadLine();
+                    Console.WriteLine("Salario:");
+                    medico.SalarioMedico = double.Parse(Console.ReadLine());
                 }
-            }
-        }
+                else if (persona is PersonalAdministrativo personalAdm)
+                {
+                    Console.WriteLine("Departamento:");
+                    personalAdm.Departamento = Console.ReadLine();
+                    Console.WriteLine("Puesto:");
+                    personalAdm.Puesto = Console.ReadLine();
+                    Console.WriteLine("Salario:");
+                    personalAdm.SalarioPersonalAdm = double.Parse(Console.ReadLine());
+                }
 
+                Console.WriteLine("Datos modificados");
+            }
+            else
+                Console.WriteLine("Persona no encontrada");
+        }
         public static void ConsultarCitas()
         {
             Console.WriteLine("Nombre del médico:");
@@ -290,7 +320,7 @@ namespace Gestión_de_un_Hospital
 
             if (medico != null)
             {
-                Console.WriteLine($" Citas del médico {medico.Nombre}:");
+                Console.WriteLine($"Citas del médico {medico.Nombre}:");
                 foreach (Cita cita in medico.Citas)
                     Console.WriteLine(cita.ToString());
             }

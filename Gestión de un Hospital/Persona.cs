@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gestión_de_un_Hospital
+﻿namespace Gestión_de_un_Hospital
 {
     class Persona
     {
@@ -23,7 +17,9 @@ namespace Gestión_de_un_Hospital
 
         public override string ToString()
         {
-            return "Nombre: " + Nombre + " Apellidos: " + Apellidos + " Sexo: " + Sexo + " Teléfono: " + Telefono;
+            return $"Nombre: {Nombre}, Apellidos: {Apellidos}, Sexo: {Sexo}, Teléfono: {Telefono}";
         }
     }
 }
+
+
