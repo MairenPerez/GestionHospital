@@ -67,7 +67,7 @@ namespace Gestión_de_un_Hospital
         {
             Console.WriteLine(@"
                         Gestión del Hospital
-    
+    -------------------------------------------------------------------------------
                         1. Dar de alta un médico
                         2. Dar de alta un paciente
                         3. Dar de alta un personal administrativo
@@ -77,9 +77,9 @@ namespace Gestión_de_un_Hospital
                         7. Ver la lista de personas del hospital
                         8. Modificar datos
                         9. Consultar citas 
-                        10. Crear cita
-                        11. Modificar cita
-                        12. Salir
+                        10.Crear cita
+                        11.Modificar cita
+                        12.Salir
                         ");
         }
 
@@ -317,7 +317,8 @@ namespace Gestión_de_un_Hospital
             else
                 Console.WriteLine("Persona no encontrada");
         }
-        public static void ConsultarCitas()
+
+        static void ConsultarCitas()
         {
             Console.WriteLine("Nombre del médico:");
             string nombreMedico = Console.ReadLine();
@@ -333,16 +334,17 @@ namespace Gestión_de_un_Hospital
             else
                 Console.WriteLine("Médico no encontrado");
         }
-       static void CrearCita()
+
+        static void CrearCita()
         {
             try
             {
                 Console.WriteLine("Introduzca el nombre del paciente: ");
-                string nombrePaciente = Console.ReadLine();
+                string nombrePaciente = Console.ReadLine().Trim();
                 Console.WriteLine("Introduzca su médico: ");
-                string nombreMedico = Console.ReadLine();
+                string nombreMedico = Console.ReadLine().Trim();
                 Console.WriteLine("Introduzca el motivo de la cita: ");
-                string motivo = Console.ReadLine();
+                string motivo = Console.ReadLine().Trim();
                 Console.WriteLine("Introduzca la fecha y hora de la cita (yyyy-MM-dd HH:mm): ");
                 DateTime fechaHora;
                 if (!DateTime.TryParse(Console.ReadLine(), out fechaHora))
@@ -351,19 +353,21 @@ namespace Gestión_de_un_Hospital
                     return;
                 }
 
-                Paciente paciente = personas.OfType<Paciente>().FirstOrDefault(p => p.Nombre == nombrePaciente);
-                Medico medico = personas.OfType<Medico>().FirstOrDefault(m => m.Nombre == nombreMedico);
+                Paciente paciente = personas.OfType<Paciente>().FirstOrDefault(p => p.Nombre.Equals(nombrePaciente, StringComparison.OrdinalIgnoreCase));
+                Medico medico = personas.OfType<Medico>().FirstOrDefault(m => m.Nombre.Equals(nombreMedico, StringComparison.OrdinalIgnoreCase));
 
                 if (paciente != null && medico != null)
                 {
-                    int idCita = hospital.Citas.Count + 1; 
+                    int idCita = hospital.Citas.Count + 1;
                     Cita cita = new Cita(idCita, fechaHora, paciente.Nombre, medico.Nombre, motivo);
                     medico.AgregarCita(cita);
                     hospital.Citas.Add(cita);
                     Console.WriteLine("Cita creada con éxito");
                 }
                 else
+                {
                     Console.WriteLine("Paciente o médico no encontrado");
+                }
             }
             catch (FormatException ex)
             {
@@ -395,7 +399,7 @@ namespace Gestión_de_un_Hospital
                         return;
                     }
 
-                    Console.WriteLine("Cual es su motivo de la cita: ");
+                    Console.WriteLine("¿Por qué desea modificar su cita?: ");
                     string nuevoMotivo = Console.ReadLine();
 
                     cita.ModificarCita(nuevaFechaHora, nuevoMotivo);
@@ -414,7 +418,6 @@ namespace Gestión_de_un_Hospital
                 Console.WriteLine($"Error al modificar la cita: {ex.Message}");
             }
         }
-
     }
 }
 
