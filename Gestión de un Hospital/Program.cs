@@ -49,6 +49,9 @@ namespace Gestión_de_un_Hospital
                         ConsultarCitas();
                         break;
                     case "10":
+                        CrearCita();
+                        break;
+                    case "11":
                         return;
                     default:
                         Console.WriteLine("Opción no válida");
@@ -71,7 +74,8 @@ namespace Gestión_de_un_Hospital
                         7. Ver la lista de personas del hospital
                         8. Modificar datos
                         9. Consultar citas 
-                        10. Salir
+                        10. Crear cita
+                        11. Salir
                         ");
         }
 
@@ -165,7 +169,6 @@ namespace Gestión_de_un_Hospital
             }
         }
 
-
         /// <summary>
         /// Dar de alta a los personales Adm
         /// </summary>
@@ -233,7 +236,6 @@ namespace Gestión_de_un_Hospital
             else
                 Console.WriteLine("Médico no encontrado");
         }
-
 
         /// <summary>
         /// Eliminamos al paciente de la lista,
@@ -326,8 +328,48 @@ namespace Gestión_de_un_Hospital
             }
             else
                 Console.WriteLine("Médico no encontrado");
-
         }
-    }
+       static void CrearCita()
+        {
+            try
+            {
+                Console.WriteLine("Introduzca el nombre del paciente: ");
+                string nombrePaciente = Console.ReadLine();
+                Console.WriteLine("Introduzca su médico: ");
+                string nombreMedico = Console.ReadLine();
+                Console.WriteLine("Introduzca el motivo de la cita: ");
+                string motivo = Console.ReadLine();
+                Console.WriteLine("Introduzca la fecha y hora de la cita (yyyy-MM-dd HH:mm): ");
+                DateTime fechaHora;
+                if (!DateTime.TryParse(Console.ReadLine(), out fechaHora))
+                {
+                    Console.WriteLine("Formato de fecha y hora incorrecto.");
+                    return;
+                }
+
+                Paciente paciente = hospital.Pacientes?.Find(p => p.Nombre == nombrePaciente);
+                Medico medico = hospital.Medicos?.Find(m => m.Nombre == nombreMedico);
+
+                if (paciente != null && medico != null)
+                {
+                    int idCita = hospital.Citas.Count + 1; 
+                    Cita cita = new Cita(idCita, fechaHora, paciente.Nombre, medico.Nombre, motivo);
+                    medico.AgregarCita(cita);
+                    hospital.Citas.Add(cita);
+                    Console.WriteLine("Cita creada con éxito");
+                }
+                else
+                    Console.WriteLine("Paciente o médico no encontrado");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Error de formato: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al crear la cita: {ex.Message}");
+            }
+        }
+    }   
 }
 

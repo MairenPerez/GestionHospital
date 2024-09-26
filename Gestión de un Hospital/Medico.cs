@@ -12,6 +12,7 @@ namespace Gestión_de_un_Hospital
         public List<Paciente> Pacientes { get; set; }
         public List<Cita> Citas { get; set; }
 
+
         public Medico(string nombre, string apellidos, string sexo, string telefono, string especialidad, int numColegiado, double salario)
         : base(nombre, apellidos, sexo, telefono)
         {
