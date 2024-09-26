@@ -347,8 +347,8 @@ namespace Gestión_de_un_Hospital
                     return;
                 }
 
-                Paciente paciente = hospital.Pacientes?.Find(p => p.Nombre == nombrePaciente);
-                Medico medico = hospital.Medicos?.Find(m => m.Nombre == nombreMedico);
+                Paciente paciente = personas.OfType<Paciente>().FirstOrDefault(p => p.Nombre == nombrePaciente);
+                Medico medico = personas.OfType<Medico>().FirstOrDefault(m => m.Nombre == nombreMedico);
 
                 if (paciente != null && medico != null)
                 {
